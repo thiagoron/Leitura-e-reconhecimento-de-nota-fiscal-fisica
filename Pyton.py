@@ -43,8 +43,11 @@ while True:
     # Converta para escala de cinza
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    # Aplique o threshold
-    _, thresh = cv2.threshold(gray, threshold_value, 255, cv2.THRESH_BINARY)
+    # Aplique o threshold adaptativo
+    block_size = 15  # Tamanho da vizinhança (deve ser ímpar)
+    C_value = 10     # Valor subtraído da média
+    thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+                                cv2.THRESH_BINARY, block_size, C_value)
 
     # Aplique o blur
     if blur_value > 1:
