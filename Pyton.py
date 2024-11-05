@@ -19,8 +19,8 @@ if not cap.isOpened():
 cv2.namedWindow('Controles')
 
 # Crie sliders para ajustar brilho, contraste e PSM
-cv2.createTrackbar('Brilho', 'Controles', 0, 100, nothing)  # Valor padrão 50
-cv2.createTrackbar('Contraste', 'Controles', 100, 100, nothing)  # Valor padrão 50
+cv2.createTrackbar('Brilho', 'Controles', 0, 100, nothing)  # Valor padrão 0
+cv2.createTrackbar('Contraste', 'Controles', 100, 100, nothing)  # Valor padrão 0
 cv2.createTrackbar('PSM', 'Controles', 4, 13, nothing)  # PSM de 0 a 13
 cv2.createTrackbar('Threshold', 'Controles', 101, 255, nothing)  # Ajuste inicial para threshold
 cv2.createTrackbar('Blur', 'Controles', 0, 10, nothing)  # Ajuste inicial para blur
@@ -46,8 +46,7 @@ while True:
     # Aplique o threshold adaptativo
     block_size = 15  # Tamanho da vizinhança (deve ser ímpar)
     C_value = 10     # Valor subtraído da média
-    thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
-                                cv2.THRESH_BINARY, block_size, C_value)
+    thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY, block_size, C_value)
 
     # Aplique o blur
     if blur_value > 1:
